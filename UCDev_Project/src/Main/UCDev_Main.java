@@ -20,23 +20,20 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+//import from DragDrop pagkage
+import DragDrop.SystemDraw;
+
+//import from FunctionFrame
+import FunctionFrame.dataDictForm;
+
 public class UCDev_Main extends JFrame{
-    private JButton systemBtn,actorBtn,usecaseBtn,associationBtn,extendBtn,includeBtn;
-    private JSplitPane splitPane1,splitPane2;
-    private JPanel jpanel1,jpanel2,jpanel3;
-    private JPanel jpanel_1,jpanel_2;
-    private JMenuItem open,save_as,save,import_item,export_item;
-    private JTabbedPane tabPane;
-    private JTextField actorIDtxt,actorNametxt,actorDestxt,actorTypetxt;//actor
-    private JComboBox typeCombo;//actor
-    private JTextField caseIDtxt,caseNametxt;//use case
-    private JButton saveActorBtn,propertyBtn;//actor && usecase
     
     private String[] sType = {"Person","System"};
     
     public UCDev_Main(){
         initUI();
         setSize(1000,700);
+        
     }
     
     private void initUI(){
@@ -83,11 +80,11 @@ public class UCDev_Main extends JFrame{
         //jtool bar
         JToolBar toolBar = new JToolBar("My Toolbar", JToolBar.VERTICAL);
         
-        //image icon
-        ImageIcon system = new ImageIcon("image/Object.gif");
+        system = new ImageIcon("image/Object.gif");
         
         // button system
 	systemBtn = new JButton("System");
+        //systemBtn.setIcon(system);
         toolBar.add(systemBtn);
         
         //button actor
@@ -107,7 +104,7 @@ public class UCDev_Main extends JFrame{
         jpanel1.add(toolBar);//add toolbar to jpanel1
         
         //Scrollpane
-        JScrollPane scrollpane = new JScrollPane();
+        scrollpane = new JScrollPane();
         scrollpane.add(jpanel2);
         getContentPane().add(scrollpane, BorderLayout.CENTER);
         
@@ -126,7 +123,7 @@ public class UCDev_Main extends JFrame{
         splitPane1.add(splitPane2);
         getContentPane().add(splitPane1);
         
-        //btnEvent(); //call method btnEvent
+        EventBtn(); //call method btnEvent
         createTappane();
     }
     
@@ -152,25 +149,21 @@ public class UCDev_Main extends JFrame{
         JLabel label1,label2,label3,label4;
         
         //add label actorid
-        label1 = new JLabel();
         label1 = new JLabel("Actor ID");
         label1.setBounds(20,10,70,20);
         jpanel_1.add(label1);
         
         //add label actorname
-        label2 = new JLabel();
         label2 = new JLabel("Actor name");
-        label2.setBounds(20,50,70,20);
+        label2.setBounds(20,50,90,20);
         jpanel_1.add(label2);
         
         //add label description
-        label3 = new JLabel();
         label3 = new JLabel("Description");
-        label3.setBounds(400,10,70,20);
+        label3.setBounds(400,10,90,20);
         jpanel_1.add(label3);
         
         //add label steriotype
-        label4 = new JLabel();
         label4 = new JLabel("Sterio Type");
         label4.setBounds(400,50,90,20);
         jpanel_1.add(label4);
@@ -207,13 +200,11 @@ public class UCDev_Main extends JFrame{
         JLabel label1,label2;
         
         //add label usecaseID
-        label1 = new JLabel();
         label1 = new JLabel("Usecase ID");
         label1.setBounds(20,10,70,20);
         jpanel_2.add(label1);
         
         //add label usecaseName
-        label2 = new JLabel();
         label2 = new JLabel("Usecase name");
         label2.setBounds(20,50,90,20);
         jpanel_2.add(label2);
@@ -235,11 +226,26 @@ public class UCDev_Main extends JFrame{
     }
     
     // event of button
-    public void btnEvent(){
-        systemBtn.addActionListener(new ActionListener(){
+    public void EventBtn(){
+        systemBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                dataDictForm data = new dataDictForm();
+                data.show();
             }
         });
     }
+    
+    //variable
+    private JButton systemBtn,actorBtn,usecaseBtn,associationBtn,extendBtn,includeBtn;
+    private JSplitPane splitPane1,splitPane2;
+    private JPanel jpanel1,jpanel2,jpanel3;
+    private JScrollPane scrollpane;
+    private JPanel jpanel_1,jpanel_2;
+    private JMenuItem open,save_as,save,import_item,export_item;
+    private JTabbedPane tabPane;
+    private JTextField actorIDtxt,actorNametxt,actorDestxt,actorTypetxt;//actor
+    private JComboBox typeCombo;//actor
+    private JTextField caseIDtxt,caseNametxt;//use case
+    private JButton saveActorBtn,propertyBtn;//actor && usecase
+    private ImageIcon system;//image icon
 }

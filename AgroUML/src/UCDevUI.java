@@ -187,11 +187,11 @@ public class UCDevUI extends javax.swing.JFrame {
 
         id.setText("Use case ID");
         jPanel2.add(id);
-        id.setBounds(10, 14, 70, 14);
+        id.setBounds(10, 14, 70, 16);
 
         name.setText("Use case Name");
         jPanel2.add(name);
-        name.setBounds(10, 40, 90, 14);
+        name.setBounds(10, 40, 90, 16);
         jPanel2.add(actorIDtxt);
         actorIDtxt.setBounds(90, 10, 103, 30);
         jPanel2.add(actorNametxt);
@@ -232,7 +232,7 @@ public class UCDevUI extends javax.swing.JFrame {
 
         sterio.setText("Stereotype");
         jPanel2.add(sterio);
-        sterio.setBounds(330, 50, 60, 14);
+        sterio.setBounds(330, 50, 60, 16);
 
         sterioComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Person", "System" }));
         jPanel2.add(sterioComboBox);
@@ -243,6 +243,11 @@ public class UCDevUI extends javax.swing.JFrame {
         SplitPane.setRightComponent(jPanel2);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -340,8 +345,8 @@ public class UCDevUI extends javax.swing.JFrame {
         usecaseIDtxt.setVisible(false);
         
         SMCanvas sm = new SMCanvas();
-        jPanel1.setLayout(new BorderLayout());
-        jPanel1.add(sm, BorderLayout.NORTH);
+        //jPanel1.setLayout(new BorderLayout());
+        //jPanel1.add(sm, BorderLayout.NORTH);
 
         
     }//GEN-LAST:event_actorBtnActionPerformed
@@ -419,6 +424,10 @@ public class UCDevUI extends javax.swing.JFrame {
         UsecaseUI ui = new UsecaseUI();
         ui.show();
     }//GEN-LAST:event_addUsecaseBtnActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseClicked
 
     /**
      * @param args the command line arguments

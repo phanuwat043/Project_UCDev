@@ -28,7 +28,7 @@ public class propertiesForm extends JFrame{
     
     public propertiesForm(){
          initUI();
-         setSize(450,600);
+         setSize(450,500);
     
      }
     private void initUI() {
@@ -63,26 +63,27 @@ public class propertiesForm extends JFrame{
         saveBtn = new JButton("Save");
         
         //set bounds of btn
-        saveBtn.setBounds(320,340,90,20);
+        saveBtn.setBounds(160,340,90,20);
         
         //setBounds of label
         
         label1.setBounds(20,60,90,20);
         label2.setBounds(20,100,120,20);
         label3.setBounds(20,140,90,20);
-        label4.setBounds(50,180,90,20);
-        label5.setBounds(50,220,90,20);
-        label6.setBounds(50,250,90,20);
+        label4.setBounds(20,180,90,20);
+        label5.setBounds(20,220,90,20);
+        label6.setBounds(20,260,90,20);
         
         //set Bounds of textField
-        txtGoal.setBounds(130,60,100,20);
-        txtPre.setBounds(130,100,150,20);
+        txtGoal.setBounds(150,60,100,20);
+        txtPre.setBounds(150,140,150,20);
         txtPost.setBounds(150,180,150,20);
         
+        
         //set bounds of combobox
-        primaryCombo.setBounds(150,250,100,20);
-        priorityCombo.setBounds(150,250,100,20);
-        complexCombo.setBounds(150,250,100,20);
+        primaryCombo.setBounds(150,100,100,20);
+        priorityCombo.setBounds(150,220,100,20);
+        complexCombo.setBounds(150,260,100,20);
         
         //set default value of index
         primaryCombo.setSelectedIndex(0);
@@ -111,16 +112,11 @@ public class propertiesForm extends JFrame{
         panel1.add(complexCombo);
         
         
-        CreateTable();
-    }
-    public void CreateTable(){
-        scrollpane1 = new JScrollPane();
-        scrollpane1.setBounds(20,400,400,100);
-        panel1.add(scrollpane1);
+        
     }
     
     public static void main(String args[]){
-        new dataDictForm();
+        new propertiesForm();
     }
     
     //variable
@@ -128,10 +124,9 @@ public class propertiesForm extends JFrame{
     private JLabel label1,label2,label3,label4,label5,label6;
     private JTextField txtGoal,txtPre,txtPost;
     private JComboBox primaryCombo,priorityCombo,complexCombo;
-    private ButtonGroup requireBtn;
     private JButton saveBtn;
-    private JScrollPane scrollpane1,scrollpane2;
-    private DefaultTableModel model;
+    private JScrollPane scrollpane1;
+
 }
 
 

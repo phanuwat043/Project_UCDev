@@ -143,9 +143,5 @@ public class scenarioForm extends JFrame{
     private JLabel label1,label2,label3,label4,label5,label6,label7,label8,label9,label10;
     private JTextField txtUID,txtUname,txtPrimaryActor,txtPre,txtPost;
     private JComboBox priorityCombo;
-    private ButtonGroup requireBtn;
     private JButton saveBtn,cancelBtn,flowBtn,altBtn,excepBtn;
-    private JTable inputTable,outputTable;
-    private JScrollPane scrollpane1,scrollpane2;
-    private DefaultTableModel model;
 }

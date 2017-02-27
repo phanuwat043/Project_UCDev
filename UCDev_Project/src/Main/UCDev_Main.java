@@ -25,8 +25,10 @@ import DragDrop.SystemDraw;
 
 //import from FunctionFrame
 import FunctionFrame.dataDictForm;
+import net.sourceforge.xuse.Xuse;
 
 public class UCDev_Main extends JFrame{
+        Xuse x = new Xuse();
     
     private String[] sType = {"Person","System"};
     
@@ -48,22 +50,52 @@ public class UCDev_Main extends JFrame{
         //Menu
         JMenu menu1 = new JMenu("File");
         
+        
+        
         //Item
         open = new JMenuItem("Open");
+        create = new JMenuItem("create");
         save_as = new JMenuItem("Save as");
         save = new JMenuItem("Save");
         import_item = new JMenuItem("Import");
         export_item = new JMenuItem("Export");
+        export_pdf = new JMenuItem("Export PDF");
+        export_XMI = new JMenuItem("Export XMI");
+        
+        
+        
+        
         menu1.add(open);
+        menu1.add(create);
         menu1.add(save_as);
         menu1.add(save);
         menu1.addSeparator();
         menu1.add(import_item);
         menu1.add(export_item);
+        
+        //export_item.add(export_pdf);
+        //export_item.add(export_XMI);
+
         //add jmenu
         menuBar.add(menu1);
         //add jmenubar
         setJMenuBar(menuBar);
+        
+        //event JMenuitem
+        create.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                    //x.newProject();
+            }
+        
+        });
+        
+        export_item.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                    //x.pdfUseCases();
+            }
+        
+        });
+        
         
         //panel
         jpanel1 = new JPanel();
@@ -241,7 +273,7 @@ public class UCDev_Main extends JFrame{
     private JPanel jpanel1,jpanel2,jpanel3;
     private JScrollPane scrollpane;
     private JPanel jpanel_1,jpanel_2;
-    private JMenuItem open,save_as,save,import_item,export_item;
+    private JMenuItem open,create,save_as,save,import_item,export_item,export_pdf,export_XMI;
     private JTabbedPane tabPane;
     private JTextField actorIDtxt,actorNametxt,actorDestxt,actorTypetxt;//actor
     private JComboBox typeCombo;//actor

@@ -17,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
 public class dataDictForm extends JFrame{
     
     private String[] type = {"int","float","double","String","char"};
-    private String[][] data = {{"1","1"}};
+    private String[][] data = {{"1","1"},{"1","1"},{"1","1"},{"1","1"}};
     private String[] header = {"Name","Description"};
     
     public dataDictForm(){
         initUI();
-        setSize(450,600);
+        setSize(480,700);
     }
     private void initUI(){
         setTitle("Data Dictionary");
@@ -99,34 +99,34 @@ public class dataDictForm extends JFrame{
         noRadio.setBounds(230,280,70,20);
         
         //add btn to panel
-        panel1.add(saveBtn);
+        getContentPane().add(saveBtn);
         
         //add label to panel
-        panel1.add(label10);
-        panel1.add(label1);
-        panel1.add(label2);
-        panel1.add(label3);
-        panel1.add(label4);
-        panel1.add(label5);
-        panel1.add(label6);
-        panel1.add(label7);
-        panel1.add(label8);
-        panel1.add(label9);
+        getContentPane().add(label10);
+        getContentPane().add(label1);
+        getContentPane().add(label2);
+        getContentPane().add(label3);
+        getContentPane().add(label4);
+        getContentPane().add(label5);
+        getContentPane().add(label6);
+        getContentPane().add(label7);
+        getContentPane().add(label8);
+        getContentPane().add(label9);
         
         //add textField to panel
-        panel1.add(txtUCID);
-        panel1.add(txtUCName);
-        panel1.add(txtName);
-        panel1.add(txtDes);
-        panel1.add(txtMax);
-        panel1.add(txtMin);
+        getContentPane().add(txtUCID);
+        getContentPane().add(txtUCName);
+        getContentPane().add(txtName);
+        getContentPane().add(txtDes);
+        getContentPane().add(txtMax);
+        getContentPane().add(txtMin);
         
         //add combobox to panel
-        panel1.add(typeCombo);
+        getContentPane().add(typeCombo);
         
         //add radiobtn to panel
-        panel1.add(yesRadio);
-        panel1.add(noRadio);
+        getContentPane().add(yesRadio);
+        getContentPane().add(noRadio);
         
         //set btnGroup
         requireBtn = new ButtonGroup();
@@ -134,19 +134,27 @@ public class dataDictForm extends JFrame{
         requireBtn.add(noRadio);
         
         //add method createtable
-        CreateTable();
+        
     }
     
     public void CreateTable(){
-        inputTable = new JTable(data,header);
-        scrollpane1 = new JScrollPane();
-        scrollpane1.setBounds(20,400,400,100);
-        inputTable.add(scrollpane1);
-        panel1.add(scrollpane1);
+       
+        getContentPane().setLayout(null);
+        
+        JTable table = new JTable(data,header);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(36, 400, 407, 79);
+        getContentPane().add(scrollPane);
+        
+        JTable table2 = new JTable(data,header);
+        JScrollPane scrollPane2 = new JScrollPane(table2);
+        scrollPane2.setBounds(36, 530, 407, 79);
+        getContentPane().add(scrollPane2);
     }
     
     public static void main(String args[]){
-        new dataDictForm();
+        dataDictForm da = new dataDictForm();
+        da.CreateTable();
     }
     
     //variable

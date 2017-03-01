@@ -39,7 +39,7 @@ public class altForm extends JFrame{
         //add panel
         panel1 = new JPanel();
         panel1.setLayout(null);
-        getContentPane().add(panel1);
+
         
         //label
         label1 = new JLabel("StepID");
@@ -77,35 +77,35 @@ public class altForm extends JFrame{
         txtDes.setBounds(150,100,150,20);
         
         //add btn to panel
-        getContentPane().add(saveBtn);
+        panel1.add(saveBtn);
         
         //add label to panel
-        getContentPane().add(label1);
-        getContentPane().add(label2);
-        getContentPane().add(label3);
+        panel1.add(label1);
+        panel1.add(label2);
+        panel1.add(label3);
         
         //add combo box
-        getContentPane().add(stepCombo);
+        panel1.add(stepCombo);
         
         //add textField to panel
-        getContentPane().add(txtStepID);
-        getContentPane().add(txtDes);
-       
-    }
-    
-    public void CreateTable(){
-       
-        getContentPane().setLayout(null);
+        panel1.add(txtStepID);
+        panel1.add(txtDes);
         
+        //create table
         JTable table = new JTable(data,header);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(36, 180, 407, 79);
-        getContentPane().add(scrollPane);
+        panel1.add(scrollPane);
+        
+        getContentPane().add(panel1);
+       
     }
+    
+    
     
     public static void main(String args[]){
         altForm al = new altForm();
-        al.CreateTable();
+       
     }
     
     //variable

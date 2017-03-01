@@ -25,6 +25,8 @@ import DragDrop.SystemDraw;
 
 //import from FunctionFrame
 import FunctionFrame.dataDictForm;
+import FunctionFrame.propertiesForm;
+import FunctionFrame.scenarioForm;
 import net.sourceforge.xuse.Xuse;
 
 public class UCDev_Main extends JFrame{
@@ -255,17 +257,30 @@ public class UCDev_Main extends JFrame{
         propertyBtn = new JButton("Properties");
         propertyBtn.setBounds(420,50,100,30);
         jpanel_2.add(propertyBtn);
+        
+        //btn action
+        propertyBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new propertiesForm();
+            }
+        });
     }
     
     // event of button
     public void EventBtn(){
         systemBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dataDictForm data = new dataDictForm();
-                data.show();
+                new dataDictForm();
             }
         });
+        usecaseBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new scenarioForm();
+            }
+        });
+        
     }
+    
     
     //variable
     private JButton systemBtn,actorBtn,usecaseBtn,associationBtn,extendBtn,includeBtn;

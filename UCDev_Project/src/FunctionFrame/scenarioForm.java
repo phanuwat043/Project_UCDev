@@ -5,6 +5,8 @@
  */
 package FunctionFrame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -130,17 +132,45 @@ public class scenarioForm extends JFrame{
         //add combobox to panel
         panel1.add(priorityCombo);
 
+        //Btn Action
+         flowBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                    new flowForm().setVisible(true);
+                    
+            }
         
+        });
+        altBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                    new altForm().setVisible(true);
+                    
+            }
+        
+        });
+        excepBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                    new exceptionForm().setVisible(true);
+                    
+            }
+        
+        });
         
         
     }
+     
+     
+     
+    
+     
      public static void main(String args[]){
         new scenarioForm();
+        
     }
+     
     
     //variable
     private JPanel panel1;
-    private JLabel label1,label2,label3,label4,label5,label6,label7,label8,label9,label10;
+    private JLabel label1,label2,label3,label4,label5,label6,label7,label8,label9;
     private JTextField txtUID,txtUname,txtPrimaryActor,txtPre,txtPost;
     private JComboBox priorityCombo;
     private JButton saveBtn,cancelBtn,flowBtn,altBtn,excepBtn;

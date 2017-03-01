@@ -33,7 +33,7 @@ public class dataDictForm extends JFrame{
         panel1 = new JPanel();
         //panel1.setBackground(Color.red);
         panel1.setLayout(null);
-        getContentPane().add(panel1);
+        
         
         //add text to label
         label1 = new JLabel("Use case ID");
@@ -99,34 +99,34 @@ public class dataDictForm extends JFrame{
         noRadio.setBounds(230,280,70,20);
         
         //add btn to panel
-        getContentPane().add(saveBtn);
+        panel1.add(saveBtn);
         
         //add label to panel
-        getContentPane().add(label10);
-        getContentPane().add(label1);
-        getContentPane().add(label2);
-        getContentPane().add(label3);
-        getContentPane().add(label4);
-        getContentPane().add(label5);
-        getContentPane().add(label6);
-        getContentPane().add(label7);
-        getContentPane().add(label8);
-        getContentPane().add(label9);
+        panel1.add(label10);
+        panel1.add(label1);
+        panel1.add(label2);
+        panel1.add(label3);
+        panel1.add(label4);
+        panel1.add(label5);
+        panel1.add(label6);
+        panel1.add(label7);
+        panel1.add(label8);
+        panel1.add(label9);
         
         //add textField to panel
-        getContentPane().add(txtUCID);
-        getContentPane().add(txtUCName);
-        getContentPane().add(txtName);
-        getContentPane().add(txtDes);
-        getContentPane().add(txtMax);
-        getContentPane().add(txtMin);
+        panel1.add(txtUCID);
+        panel1.add(txtUCName);
+        panel1.add(txtName);
+        panel1.add(txtDes);
+        panel1.add(txtMax);
+        panel1.add(txtMin);
         
         //add combobox to panel
-        getContentPane().add(typeCombo);
+        panel1.add(typeCombo);
         
         //add radiobtn to panel
-        getContentPane().add(yesRadio);
-        getContentPane().add(noRadio);
+        panel1.add(yesRadio);
+        panel1.add(noRadio);
         
         //set btnGroup
         requireBtn = new ButtonGroup();
@@ -135,26 +135,25 @@ public class dataDictForm extends JFrame{
         
         //add method createtable
         
-    }
-    
-    public void CreateTable(){
-       
-        getContentPane().setLayout(null);
         
         JTable table = new JTable(data,header);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(36, 400, 407, 79);
-        getContentPane().add(scrollPane);
+        panel1.add(scrollPane);
         
         JTable table2 = new JTable(data,header);
         JScrollPane scrollPane2 = new JScrollPane(table2);
         scrollPane2.setBounds(36, 530, 407, 79);
-        getContentPane().add(scrollPane2);
+        panel1.add(scrollPane2);
+        
+        getContentPane().add(panel1);
+        
     }
+    
+    
     
     public static void main(String args[]){
         dataDictForm da = new dataDictForm();
-        da.CreateTable();
     }
     
     //variable

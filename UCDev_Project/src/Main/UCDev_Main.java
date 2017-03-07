@@ -20,8 +20,21 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+//Event of click and object
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import javax.swing.RepaintManager;
+
 //import from DragDrop pagkage
-import DragDrop.SystemDraw;
+import DragDrop.*;
 
 //import from FunctionFrame
 import FunctionFrame.dataDictForm;
@@ -29,15 +42,18 @@ import FunctionFrame.propertiesForm;
 import FunctionFrame.scenarioForm;
 import net.sourceforge.xuse.Xuse;
 
-public class UCDev_Main extends JFrame{
-        Xuse x = new Xuse();
-    
+public class UCDev_Main extends JFrame implements MouseMotionListener{
+    Xuse x = new Xuse();
+    DragDrop d = new DragDrop(20,20);
+    DrawOval o = new DrawOval(50,50);
+    Graphics g;
+    Graphics2D g2d;
     private String[] sType = {"Person","System"};
     
     public UCDev_Main(){
         initUI();
         setSize(1000,700);
-        
+        jpanel2.addMouseMotionListener(this);
     }
     
     private void initUI(){
@@ -159,6 +175,7 @@ public class UCDev_Main extends JFrame{
         
         EventBtn(); //call method btnEvent
         createTappane();
+	//jpanel2.addMouseMotionListener(this);
     }
     
     //create Tappane
@@ -271,6 +288,7 @@ public class UCDev_Main extends JFrame{
         systemBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new dataDictForm();
+		d.paint(jpanel2.getGraphics());
             }
         });
         usecaseBtn.addActionListener(new ActionListener() {
@@ -281,6 +299,22 @@ public class UCDev_Main extends JFrame{
         
     }
     
+    public void mouseDragged(MouseEvent e){
+        if(e.equals(d)){
+            d.x = e.getX();
+            d.y = e.getY();
+        }
+        
+        if(e.equals(o)){
+            o.x = e.getX();
+            o.y = e.getY();
+
+        }
+        
+        repaint();
+        //System.out.println(e.getX());
+    }
+    public void mouseMoved(MouseEvent e){}
     
     //variable
     private JButton systemBtn,actorBtn,usecaseBtn,associationBtn,extendBtn,includeBtn;

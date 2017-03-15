@@ -128,7 +128,7 @@ public class UCDev_Main extends JFrame implements MouseListener {
 
         //jtool bar
         JToolBar toolBar = new JToolBar("My Toolbar", JToolBar.VERTICAL);
-
+        //blankLabel = new JLabel("    ");
         
         //system = new ImageIcon("image/Object.gif");
         
@@ -138,23 +138,36 @@ public class UCDev_Main extends JFrame implements MouseListener {
         label1.setBounds(20,10,70,20);
         toolBar.add(systemBtn);
         toolBar.add(label1);
+        toolBar.add(new JLabel("    "));
        
         //button actor
         actorBtn = new JButton(new ImageIcon("image/Actor.gif"));
+        JLabel label2 = new JLabel("Actor");
+        label2.setBounds(20,10,70,20);
         //actorBtn.setIcon(system);
         toolBar.add(actorBtn);
+        toolBar.add(label2);
+        toolBar.add(new JLabel("    "));
 
         //usecaseBtn
         usecaseBtn = new JButton(new ImageIcon("image/useCase.gif"));
         //usecaseBtn.setIcon(system);
+        JLabel label3 = new JLabel("UseCase");
+        label3.setBounds(20,10,70,20);
         toolBar.enable(false);
         toolBar.setBorderPainted(false);
         toolBar.add(usecaseBtn);
+        toolBar.add(label3);
+        toolBar.add(new JLabel("    "));
 
         //assiciationBtn
         associationBtn = new JButton(new ImageIcon("image/Association.gif"));
+        JLabel label4 = new JLabel("Association");
+        label4.setBounds(20,10,70,20);
         //associationBtn.setIcon(system);
         toolBar.add(associationBtn);
+        toolBar.add(label4);
+        toolBar.add(new JLabel("    "));
 
         jpanel1.add(toolBar);//add toolbar to jpanel1
 

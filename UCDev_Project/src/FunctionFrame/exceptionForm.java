@@ -105,9 +105,9 @@ public class exceptionForm extends JFrame{
     }
     
     
-     public static void main(String args[]){
+     /*public static void main(String args[]){
         exceptionForm ex =  new exceptionForm();
-     }
+     }*/
       
     
    

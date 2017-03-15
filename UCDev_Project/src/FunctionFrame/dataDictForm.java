@@ -152,9 +152,9 @@ public class dataDictForm extends JFrame{
     
     
     
-    public static void main(String args[]){
+    /*public static void main(String args[]){
         dataDictForm da = new dataDictForm();
-    }
+    }*/
     
     //variable
     private JPanel panel1;

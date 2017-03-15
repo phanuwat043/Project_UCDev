@@ -46,6 +46,7 @@ import java.awt.event.MouseListener;
 public class UCDev_Main extends JFrame implements MouseListener {
 
     //Xuse x = new Xuse();
+    ActorXMLfile acXml = new ActorXMLfile();
     DragDrop d = new DragDrop(20, 20);
     //DrawOval o = new DrawOval(50, 50);
     Graphics g;
@@ -248,6 +249,13 @@ public class UCDev_Main extends JFrame implements MouseListener {
         saveActorBtn = new JButton("Save Actor");
         saveActorBtn.setBounds(630, 50, 100, 30);
         jpanel_1.add(saveActorBtn);
+        
+        saveActorBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                acXml.getInfo(actorIDtxt.getText(), actorNametxt.getText(), 
+                        actorDestxt.getText(), typeCombo.getSelectedItem().toString());
+            }
+        });
     }
 
     //event of tappane2
@@ -304,8 +312,6 @@ public class UCDev_Main extends JFrame implements MouseListener {
     public void mousePressed(MouseEvent e) {
         d.x = e.getX();
         d.y = e.getY();
-
-        
         jpanel2.repaint();
     }
 

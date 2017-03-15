@@ -83,10 +83,10 @@ public class flowForm extends JFrame{
     }
     
    
-    public static void main(String args[]){
+    /*public static void main(String args[]){
         flowForm fl = new flowForm();
         
-    }
+    }*/
     
     //variable
     private JPanel panel1;

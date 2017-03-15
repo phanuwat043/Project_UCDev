@@ -41,6 +41,7 @@ public class UCDev_Main extends JFrame{
     }
     
     private void initUI(){
+        JLabel label1,label2;
         setTitle("UCDev version 1.0");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -114,25 +115,30 @@ public class UCDev_Main extends JFrame{
         //jtool bar
         JToolBar toolBar = new JToolBar("My Toolbar", JToolBar.VERTICAL);
         
-        system = new ImageIcon("image/Object.gif");
+        //system = new ImageIcon("image/Object.gif");
         
         // button system
-	systemBtn = new JButton("System");
-        //systemBtn.setIcon(system);
+	systemBtn = new JButton(new ImageIcon("image/Object.gif"));
+        label1 = new JLabel("System");
+        label1.setBounds(20,10,70,20);
         toolBar.add(systemBtn);
+        toolBar.add(label1);
         
         //button actor
-        actorBtn = new JButton("Actor");
+        actorBtn = new JButton(new ImageIcon("image/Actor.gif"));
+        //actorBtn.setIcon(system);
         toolBar.add(actorBtn);
         
         //usecaseBtn
-        usecaseBtn = new JButton("Use case");
+        usecaseBtn = new JButton(new ImageIcon("image/useCase.gif"));
+        //usecaseBtn.setIcon(system);
         toolBar.enable(false);
         toolBar.setBorderPainted(false);
         toolBar.add(usecaseBtn);
         
         //assiciationBtn
-        associationBtn = new JButton("Association");
+        associationBtn = new JButton(new ImageIcon("image/Association.gif"));
+        //associationBtn.setIcon(system);
         toolBar.add(associationBtn);
         
         jpanel1.add(toolBar);//add toolbar to jpanel1
@@ -231,7 +237,7 @@ public class UCDev_Main extends JFrame{
     
     //event of tappane2
     public void itemTap2(){
-        JLabel label1,label2;
+        JLabel label1,label2,label3,label4;
         
         //add label usecaseID
         label1 = new JLabel("Usecase ID");
@@ -261,7 +267,7 @@ public class UCDev_Main extends JFrame{
         //btn action
         propertyBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new propertiesForm();
+                new scenarioForm();
             }
         });
     }
@@ -273,11 +279,7 @@ public class UCDev_Main extends JFrame{
                 new dataDictForm();
             }
         });
-        usecaseBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new scenarioForm();
-            }
-        });
+        
         
     }
     

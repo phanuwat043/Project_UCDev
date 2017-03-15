@@ -27,7 +27,7 @@ public class scenarioForm extends JFrame{
     String[] degree = {"1-Very High","2-High","3-Medium","4-Low","5-Very Low"};
     public scenarioForm(){
          initUI();
-         setSize(450,530);
+         setSize(450,570);
     
      }
      private void initUI() {
@@ -45,21 +45,25 @@ public class scenarioForm extends JFrame{
         label2 = new JLabel("Use case name");
         label3 = new JLabel("Primary Actor");
         label4 = new JLabel("Priority");
-        label5 = new JLabel("Pre-conditions");
-        label6 = new JLabel("Post-conditions");
-        label7 = new JLabel("Flow of event");
-        label8 = new JLabel("Alternative flow");
-        label9 = new JLabel("Exception event");
+        label5 = new JLabel("Complexity");
+        label6 = new JLabel("Goal");
+        label7 = new JLabel("Pre-conditions");
+        label8 = new JLabel("Post-conditions");
+        label9 = new JLabel("Flow of event");
+        label10 = new JLabel("Alternative flow");
+        label11 = new JLabel("Exception event");
         
         //textField
         txtUID = new JTextField();
         txtUname = new JTextField();
         txtPrimaryActor = new JTextField();
+        txtGoal = new JTextField();
         txtPre = new JTextField();
         txtPost = new JTextField();
         
         //ComboBox
         priorityCombo = new JComboBox(degree);
+        complexCombo = new JComboBox(degree);
 
         
         //Button
@@ -70,11 +74,11 @@ public class scenarioForm extends JFrame{
         excepBtn = new JButton("View Detail");
         
         //set bounds of btn
-        saveBtn.setBounds(200,430,90,20);
-        cancelBtn.setBounds(300,430,90,20);
-        flowBtn.setBounds(160,300,110,20);
-        altBtn.setBounds(160,340,110,20);
-        excepBtn.setBounds(160,380,110,20);
+        saveBtn.setBounds(200,500,90,20);
+        cancelBtn.setBounds(300,500,90,20);
+        flowBtn.setBounds(160,380,110,20);
+        altBtn.setBounds(160,420,110,20);
+        excepBtn.setBounds(160,460,110,20);
         
         
         //setBounds of label
@@ -88,20 +92,26 @@ public class scenarioForm extends JFrame{
         label7.setBounds(20,300,90,20);
         label8.setBounds(20,340,90,20);
         label9.setBounds(20,380,90,20);
+        label10.setBounds(20,420,90,20);
+        label11.setBounds(20,460,90,20);
         
         //set Bounds of textField
         txtUID.setBounds(150,60,100,20);
         txtUname.setBounds(150,100,150,20);
         txtPrimaryActor.setBounds(150,140,150,20);
-        txtPre.setBounds(150,220,150,20);
-        txtPost.setBounds(150,260,150,20);
+        txtGoal.setBounds(150,260,150,20);
+        txtPre.setBounds(150,300,150,20);
+        txtPost.setBounds(150,340,150,20);
         
         
         //set bounds of combobox
         priorityCombo.setBounds(150,180,100,20);
+        complexCombo.setBounds(150,220,100,20);
         
         //set default value of index
         priorityCombo.setSelectedIndex(0);
+        complexCombo.setSelectedIndex(0);
+        
         
         //add btn to panel
         panel1.add(saveBtn);
@@ -121,16 +131,20 @@ public class scenarioForm extends JFrame{
         panel1.add(label7);
         panel1.add(label8);
         panel1.add(label9);
+        panel1.add(label10);
+        panel1.add(label11);
         
         //add textField to panel
         panel1.add(txtUID);
         panel1.add(txtUname);
         panel1.add(txtPrimaryActor);
+        panel1.add(txtGoal);
         panel1.add(txtPre);
         panel1.add(txtPost);
         
         //add combobox to panel
         panel1.add(priorityCombo);
+        panel1.add(complexCombo);
 
         //Btn Action
          flowBtn.addActionListener(new ActionListener(){
@@ -170,8 +184,8 @@ public class scenarioForm extends JFrame{
     
     //variable
     private JPanel panel1;
-    private JLabel label1,label2,label3,label4,label5,label6,label7,label8,label9;
-    private JTextField txtUID,txtUname,txtPrimaryActor,txtPre,txtPost;
-    private JComboBox priorityCombo;
+    private JLabel label1,label2,label3,label4,label5,label6,label7,label8,label9,label10,label11;
+    private JTextField txtUID,txtUname,txtPrimaryActor,txtPre,txtPost,txtGoal;
+    private JComboBox priorityCombo,complexCombo;
     private JButton saveBtn,cancelBtn,flowBtn,altBtn,excepBtn;
 }

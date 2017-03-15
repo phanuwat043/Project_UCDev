@@ -57,14 +57,11 @@ public class UCDev_Main extends JFrame implements MouseListener {
         setSize(1000, 700);
         jpanel2.addMouseListener(this);
     }
-<<<<<<< HEAD
-    
-    private void initUI(){
-        JLabel label1,label2;
-=======
 
-    private void initUI() {
->>>>>>> origin/master
+    
+  
+
+    private void initUI(){
         setTitle("UCDev version 1.0");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -130,27 +127,17 @@ public class UCDev_Main extends JFrame implements MouseListener {
 
         //jtool bar
         JToolBar toolBar = new JToolBar("My Toolbar", JToolBar.VERTICAL);
-<<<<<<< HEAD
+
         
         //system = new ImageIcon("image/Object.gif");
         
         // button system
 	systemBtn = new JButton(new ImageIcon("image/Object.gif"));
-        label1 = new JLabel("System");
+        JLabel label1 = new JLabel("System");
         label1.setBounds(20,10,70,20);
         toolBar.add(systemBtn);
         toolBar.add(label1);
-        
-=======
-
-        system = new ImageIcon("image/Object.gif");
-
-        // button system
-        systemBtn = new JButton("System");
-        //systemBtn.setIcon(system);
-        toolBar.add(systemBtn);
-
->>>>>>> origin/master
+       
         //button actor
         actorBtn = new JButton(new ImageIcon("image/Actor.gif"));
         //actorBtn.setIcon(system);
@@ -264,15 +251,12 @@ public class UCDev_Main extends JFrame implements MouseListener {
     }
 
     //event of tappane2
-<<<<<<< HEAD
+
+   
     public void itemTap2(){
-        JLabel label1,label2,label3,label4;
-        
-=======
-    public void itemTap2() {
         JLabel label1, label2;
 
->>>>>>> origin/master
+
         //add label usecaseID
         label1 = new JLabel("Usecase ID");
         label1.setBounds(20, 10, 70, 20);
@@ -293,17 +277,9 @@ public class UCDev_Main extends JFrame implements MouseListener {
         caseNametxt.setBounds(110, 50, 300, 20);
         jpanel_2.add(caseNametxt);
 
-        //add properties btn
-        propertyBtn = new JButton("Properties");
-        propertyBtn.setBounds(420, 50, 100, 30);
-        jpanel_2.add(propertyBtn);
-
+        
         //btn action
-        propertyBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new scenarioForm();
-            }
-        });
+        
     }
 
     // event of button
@@ -314,9 +290,9 @@ public class UCDev_Main extends JFrame implements MouseListener {
                 d.paint(jpanel2.getGraphics());
             }
         });
-<<<<<<< HEAD
+
         
-=======
+
         usecaseBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new scenarioForm();
@@ -328,7 +304,7 @@ public class UCDev_Main extends JFrame implements MouseListener {
     public void mousePressed(MouseEvent e) {
         d.x = e.getX();
         d.y = e.getY();
->>>>>>> origin/master
+
         
         jpanel2.repaint();
     }
@@ -360,6 +336,6 @@ public class UCDev_Main extends JFrame implements MouseListener {
     private JTextField actorIDtxt, actorNametxt, actorDestxt, actorTypetxt;//actor
     private JComboBox typeCombo;//actor
     private JTextField caseIDtxt, caseNametxt;//use case
-    private JButton saveActorBtn, propertyBtn;//actor && usecase
+    private JButton saveActorBtn;//actor && usecase
     private ImageIcon system;//image icon
 }

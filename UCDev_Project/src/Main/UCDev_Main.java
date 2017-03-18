@@ -40,14 +40,15 @@ import DragDrop.*;
 import FunctionFrame.dataDictForm;
 import FunctionFrame.propertiesForm;
 import FunctionFrame.scenarioForm;
+import GenXML.ActorXMLfile;
 import java.awt.event.MouseListener;
 //import net.sourceforge.xuse.Xuse;
 
-public class UCDev_Main extends JFrame implements MouseListener {
+public class UCDev_Main extends JFrame implements MouseMotionListener {
 
     //Xuse x = new Xuse();
     ActorXMLfile acXml = new ActorXMLfile();
-    DragDrop d = new DragDrop(20, 20);
+    DragDrop d;
     //DrawOval o = new DrawOval(50, 50);
     Graphics g;
     Graphics2D g2d;
@@ -56,7 +57,8 @@ public class UCDev_Main extends JFrame implements MouseListener {
     public UCDev_Main() {
         initUI();
         setSize(1000, 700);
-        jpanel2.addMouseListener(this);
+        //this.d = new DragDrop(20,20,d.getGraphics());
+        jpanel2.addMouseMotionListener(this);
     }
 
     
@@ -120,7 +122,7 @@ public class UCDev_Main extends JFrame implements MouseListener {
         jpanel3 = new JPanel();
         //set background color panel 
         //jpanel1.setBackground(Color.CYAN);
-        jpanel2.setBackground(Color.white);
+        //jpanel2.setBackground(Color.white);
         //jpanel3.setBackground(Color.CYAN);
 
         //set layout of jpanel3
@@ -297,10 +299,8 @@ public class UCDev_Main extends JFrame implements MouseListener {
         caseNametxt = new JTextField();
         caseNametxt.setBounds(110, 50, 300, 20);
         jpanel_2.add(caseNametxt);
-
         
-        //btn action
-        
+        //btn action   
     }
 
     // event of button
@@ -308,7 +308,7 @@ public class UCDev_Main extends JFrame implements MouseListener {
         systemBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //new dataDictForm();
-                d.paint(jpanel2.getGraphics());
+                //add(jpanel2,d.getGraphics());
             }
         });
 
@@ -319,28 +319,6 @@ public class UCDev_Main extends JFrame implements MouseListener {
                 new scenarioForm();
             }
         });
-
-    }
-
-    public void mousePressed(MouseEvent e) {
-        d.x = e.getX();
-        d.y = e.getY();
-        jpanel2.repaint();
-    }
-
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    public void mouseClicked(MouseEvent e) {
 
     }
 
@@ -357,4 +335,17 @@ public class UCDev_Main extends JFrame implements MouseListener {
     private JTextField caseIDtxt, caseNametxt;//use case
     private JButton saveActorBtn;//actor && usecase
     private ImageIcon system;//image icon
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        d.x = e.getX();
+        d.y = e.getY();
+        scrollpane.revalidate();
+        jpanel2.repaint();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        
+    }
 }

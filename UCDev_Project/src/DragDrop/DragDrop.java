@@ -10,14 +10,21 @@ import java.awt.geom.Rectangle2D;
 public class DragDrop {
     public int x,y;
     public int w,h;
+    public Graphics g;
     public Graphics2D g2d;
     
-    public DragDrop(int x,int y){
+    public DragDrop(int x,int y,Graphics g){
         this.x = x;
         this.y = y;
         w = 60;
         h = 60;
         
+    }
+
+    public Graphics getGraphics() {
+        g2d = (Graphics2D) g;
+        g2d.drawRect(x, y, w, h);
+        return g;
     }
 
     public int getX(){
@@ -34,15 +41,5 @@ public class DragDrop {
     
     public int getH(){
         return h;
-    }
-    
-    public void paint(Graphics g){
-        g2d = (Graphics2D) g;
-        g2d.drawRect(x, y, w, h);
-    }
-    
-    public void paintOval(Graphics g){
-        g2d = (Graphics2D) g;
-        g2d.drawOval(x, y, w, h);
     }
 }

@@ -180,7 +180,7 @@ public class UsecaseXML {
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             
             //Save file XML
-            //StreamResult result = new StreamResult(new File("C:\\file.xml"));
+            //StreamResult result = new StreamResult(new File("D:\\file.xml"));
             
             // Output to console for testing
             StreamResult result = new StreamResult(System.out);

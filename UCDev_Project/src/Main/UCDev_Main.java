@@ -19,6 +19,14 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import javax.swing.*;
+import javax.swing.tree.*;
+import javax.swing.event.*;
 
 //Event of click and object
 import java.awt.Graphics;
@@ -42,6 +50,11 @@ import FunctionFrame.propertiesForm;
 import FunctionFrame.scenarioForm;
 import GenXML.ActorXMLfile;
 import java.awt.event.MouseListener;
+import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 //import net.sourceforge.xuse.Xuse;
 
 public class UCDev_Main extends JFrame implements MouseMotionListener {
@@ -56,19 +69,22 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
 
     public UCDev_Main() {
         initUI();
-        setSize(1000, 700);
+        setSize(1050, 700);
         //this.d = new DragDrop(20,20,d.getGraphics());
         jpanel2.addMouseMotionListener(this);
     }
 
-    
-  
+ 
 
     private void initUI(){
         setTitle("UCDev version 1.0");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
+        
+        
+        
+        
 
         //Menubar
         JMenuBar menuBar = new JMenuBar();
@@ -120,68 +136,70 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         jpanel1 = new JPanel();
         jpanel2 = new JPanel();
         jpanel3 = new JPanel();
+        
+        
+        
         //set background color panel 
         //jpanel1.setBackground(Color.CYAN);
         //jpanel2.setBackground(Color.white);
         //jpanel3.setBackground(Color.CYAN);
-
+     
         //set layout of jpanel3
         jpanel3.setLayout(new BorderLayout());
+        jpanel1.setLayout(new BorderLayout());
+        jpanel1.add(new FileBrowser());
 
         //jtool bar
-        JToolBar toolBar = new JToolBar("My Toolbar", JToolBar.VERTICAL);
-        //blankLabel = new JLabel("    ");
+        JToolBar toolBar = new JToolBar("My Toolbar", JToolBar.HORIZONTAL);
         
-        //system = new ImageIcon("image/Object.gif");
-        
+         
+         jpanel2.add(toolBar);
+          getContentPane().add(toolBar, BorderLayout.WEST);
+       
         // button system
 	systemBtn = new JButton(new ImageIcon("image/Object.gif"));
-        JLabel label1 = new JLabel("System");
-        label1.setBounds(20,10,70,20);
+        //JLabel label1 = new JLabel("System");
+        systemBtn.setText("System");
+        //label1.setBounds(20,10,70,20);
         toolBar.add(systemBtn);
-        toolBar.add(label1);
-        toolBar.add(new JLabel("    "));
+        //toolBar.add(label1);
+        
        
         //button actor
         actorBtn = new JButton(new ImageIcon("image/Actor.gif"));
-        JLabel label2 = new JLabel("Actor");
-        label2.setBounds(20,10,70,20);
-        //actorBtn.setIcon(system);
+        actorBtn.setText("Actor");
         toolBar.add(actorBtn);
-        toolBar.add(label2);
-        toolBar.add(new JLabel("    "));
-
+        
+        
+ 
         //usecaseBtn
-        usecaseBtn = new JButton(new ImageIcon("image/useCase.gif"));
-        //usecaseBtn.setIcon(system);
-        JLabel label3 = new JLabel("UseCase");
-        label3.setBounds(20,10,70,20);
-        toolBar.enable(false);
-        toolBar.setBorderPainted(false);
+        usecaseBtn = new JButton(new ImageIcon("image/useCase.gif")); 
+        usecaseBtn.setText("UseCase");
         toolBar.add(usecaseBtn);
-        toolBar.add(label3);
-        toolBar.add(new JLabel("    "));
+        //toolBar.add(label3);
+      
 
         //assiciationBtn
         associationBtn = new JButton(new ImageIcon("image/Association.gif"));
-        JLabel label4 = new JLabel("Association");
-        label4.setBounds(20,10,70,20);
-        //associationBtn.setIcon(system);
+        associationBtn.setText("Associaton");
         toolBar.add(associationBtn);
-        toolBar.add(label4);
-        toolBar.add(new JLabel("    "));
+       
 
-        jpanel1.add(toolBar);//add toolbar to jpanel1
+        jpanel2.add(toolBar);//add toolbar to jpanel1
 
         //Scrollpane
         scrollpane = new JScrollPane();
         scrollpane.add(jpanel2);
         getContentPane().add(scrollpane, BorderLayout.CENTER);
+        
+        
+         
+     
 
         //splitpane
         splitPane1 = new JSplitPane();
         splitPane1.setBounds(70, 70, 70, 70);
-        splitPane1.setDividerLocation(120);// divide location
+        splitPane1.setDividerLocation(250);// divide location
         splitPane1.setLeftComponent(jpanel1); // Left
         splitPane1.setRightComponent(jpanel2); // Right
 
@@ -192,7 +210,9 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         splitPane2.setBottomComponent(jpanel3);//bottom
         splitPane1.add(splitPane2);
         getContentPane().add(splitPane1);
-
+        
+       
+        
         EventBtn(); //call method btnEvent
         createTappane();
         //jpanel2.addMouseMotionListener(this);
@@ -324,9 +344,9 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
 
     //variable
     private JButton systemBtn, actorBtn, usecaseBtn, associationBtn, extendBtn, includeBtn;
-    private JSplitPane splitPane1, splitPane2;
-    private JPanel jpanel1, jpanel2, jpanel3;
-    private JScrollPane scrollpane;
+    private JSplitPane splitPane1, splitPane2, splitPane3;
+    private JPanel jpanel1, jpanel2, jpanel3,jpanel4;
+    private JScrollPane scrollpane,scrollpane1;
     private JPanel jpanel_1, jpanel_2;
     private JMenuItem open, create, save_as, save, import_item, export_item, export_pdf, export_XMI;
     private JTabbedPane tabPane;
@@ -338,10 +358,10 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        d.x = e.getX();
+        /*d.x = e.getX();
         d.y = e.getY();
         scrollpane.revalidate();
-        jpanel2.repaint();
+        jpanel2.repaint();*/
     }
 
     @Override

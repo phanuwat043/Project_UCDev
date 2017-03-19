@@ -43,12 +43,15 @@ import javax.swing.RepaintManager;
 
 //import from DragDrop pagkage
 import DragDrop.*;
+import FunctionFrame.actorForm;
 
 //import from FunctionFrame
 import FunctionFrame.dataDictForm;
 import FunctionFrame.propertiesForm;
 import FunctionFrame.scenarioForm;
-import GenXML.ActorXMLfile;
+import GenXML.*;
+import genHTML.GenActor;
+import genHTML.GenUseCase;
 import java.awt.event.MouseListener;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
@@ -61,6 +64,8 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
 
     //Xuse x = new Xuse();
     ActorXMLfile acXml = new ActorXMLfile();
+    FileBrowser fileForm = new FileBrowser();
+    
     DragDrop d;
     //DrawOval o = new DrawOval(50, 50);
     Graphics g;
@@ -74,23 +79,18 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         jpanel2.addMouseMotionListener(this);
     }
 
- 
-
     private void initUI(){
         setTitle("UCDev version 1.0");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
         
-        
-        
-        
-
         //Menubar
         JMenuBar menuBar = new JMenuBar();
 
         //Menu
         JMenu menu1 = new JMenu("File");
+        JMenu menu2 = new JMenu("Generate");
 
         //Item
         open = new JMenuItem("Open");
@@ -101,7 +101,12 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         export_item = new JMenuItem("Export");
         export_pdf = new JMenuItem("Export PDF");
         export_XMI = new JMenuItem("Export XMI");
-
+        
+        //item2
+        genUseCase = new JMenuItem("Generate UseCase");
+        genActor = new JMenuItem("Generate Actor");
+        
+        //menu1
         menu1.add(open);
         menu1.add(create);
         menu1.add(save_as);
@@ -109,18 +114,39 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         menu1.addSeparator();
         menu1.add(import_item);
         menu1.add(export_item);
+        
+        //menu2
+        menu2.add(genUseCase);
+        menu2.add(genActor);
+        
 
         //export_item.add(export_pdf);
         //export_item.add(export_XMI);
         //add jmenu
         menuBar.add(menu1);
+        menuBar.add(menu2);
         //add jmenubar
         setJMenuBar(menuBar);
 
         //event JMenuitem
         create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                //x.newProject();
+                String s = (String) JOptionPane.showInputDialog(
+                        null,
+                        "UCDev PROJECT:\n"
+                        + "\"Input your project name?\"",
+                        "ProjectName");
+
+                String l1 = "" + s;
+                String sl1 = "Actor";
+                String sl2 = "UseCase";
+                String paths1 = "D:\\Doc\\" + l1 + "\\" + sl1;
+                String paths2 = "D:\\Doc\\" + l1 + "\\" + sl2;
+
+                File file1 = new File(paths1);
+                File file2 = new File(paths2);
+                file1.mkdirs();
+                file2.mkdirs();
             }
 
         });
@@ -128,6 +154,20 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         export_item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 //x.pdfUseCases();
+            }
+
+        });
+        
+        //Button event generate
+        genUseCase.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+              new GenUseCase().setVisible(true);
+            }
+
+        });
+         genActor.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+              new GenActor().setVisible(true); 
             }
 
         });
@@ -147,14 +187,14 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         //set layout of jpanel3
         jpanel3.setLayout(new BorderLayout());
         jpanel1.setLayout(new BorderLayout());
-        jpanel1.add(new FileBrowser());
+        jpanel1.add(fileForm);
 
         //jtool bar
         JToolBar toolBar = new JToolBar("My Toolbar", JToolBar.HORIZONTAL);
         
          
-         jpanel2.add(toolBar);
-          getContentPane().add(toolBar, BorderLayout.WEST);
+        jpanel2.add(toolBar);
+        getContentPane().add(toolBar, BorderLayout.WEST);
        
         // button system
 	systemBtn = new JButton(new ImageIcon("image/Object.gif"));
@@ -205,7 +245,7 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
 
         splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         splitPane2.setBounds(70, 70, 70, 70);
-        splitPane2.setDividerLocation(500);
+        splitPane2.setDividerLocation(700);
         splitPane2.setTopComponent(jpanel2);//top
         splitPane2.setBottomComponent(jpanel3);//bottom
         splitPane1.add(splitPane2);
@@ -214,8 +254,9 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
        
         
         EventBtn(); //call method btnEvent
-        createTappane();
+        //createTappane();
         //jpanel2.addMouseMotionListener(this);
+        
     }
 
     //create Tappane
@@ -287,8 +328,8 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         
         saveActorBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                acXml.getInfo(actorIDtxt.getText(), actorNametxt.getText(), 
-                        actorDestxt.getText(), typeCombo.getSelectedItem().toString());
+                WriteActorXML xmlActor = new WriteActorXML(actorIDtxt.getText()
+                        ,actorNametxt.getText(),actorDestxt.getText(),typeCombo.getSelectedItem().toString());
             }
         });
     }
@@ -332,7 +373,11 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
             }
         });
 
-        
+        actorBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new actorForm();
+            }
+        });
 
         usecaseBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -349,9 +394,10 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
     private JScrollPane scrollpane,scrollpane1;
     private JPanel jpanel_1, jpanel_2;
     private JMenuItem open, create, save_as, save, import_item, export_item, export_pdf, export_XMI;
+    private JMenuItem genUseCase,genActor;
     private JTabbedPane tabPane;
-    private JTextField actorIDtxt, actorNametxt, actorDestxt, actorTypetxt;//actor
-    private JComboBox typeCombo;//actor
+    public JTextField actorIDtxt, actorNametxt, actorDestxt, actorTypetxt;//actor
+    public JComboBox typeCombo;//actor
     private JTextField caseIDtxt, caseNametxt;//use case
     private JButton saveActorBtn;//actor && usecase
     private ImageIcon system;//image icon

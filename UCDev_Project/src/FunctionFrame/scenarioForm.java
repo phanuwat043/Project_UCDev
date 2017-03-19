@@ -20,11 +20,11 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 //export UsecaseXML gennerate
-import GenXML.UsecaseXML;
+import GenXML.*;
 
 public class scenarioForm extends JFrame {
 
-    UsecaseXML ucXml = new UsecaseXML();
+    //WriteXML_Usecase writeXML;
     String[] degree = {"1-Very High", "2-High", "3-Medium", "4-Low", "5-Very Low"};
 
     public scenarioForm() {
@@ -173,9 +173,10 @@ public class scenarioForm extends JFrame {
     public void eventBtn() {
         saveBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                ucXml.getInfo(txtUID.getText(), txtUname.getText(), txtPrimaryActor.getText(),
-                         priorityCombo.getSelectedItem().toString(), complexCombo.getSelectedItem().toString(),
-                         txtPost.getText(), txtPost.getText(), txtGoal.getText());
+                WriteXML_Usecase writeXML = new WriteXML_Usecase(txtUID.getText(),txtUname.getText()
+                           ,txtPrimaryActor.getText(),priorityCombo.getSelectedItem().toString()
+                           ,complexCombo.getSelectedItem().toString(),txtGoal.getText()
+                           ,txtPre.getText(),txtPost.getText(),"","","");
             }
 
         });
@@ -183,13 +184,12 @@ public class scenarioForm extends JFrame {
 
     /*public static void main(String args[]) {
         new scenarioForm();
-
     }*/
 
     //variable
     private JPanel panel1;
     private JLabel label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11;
-    private JTextField txtUID, txtUname, txtPrimaryActor, txtPre, txtPost, txtGoal;
-    private JComboBox priorityCombo, complexCombo;
+    public JTextField txtUID, txtUname, txtPrimaryActor, txtPre, txtPost, txtGoal;
+    public JComboBox priorityCombo, complexCombo;
     private JButton saveBtn, cancelBtn, flowBtn, altBtn, excepBtn;
 }

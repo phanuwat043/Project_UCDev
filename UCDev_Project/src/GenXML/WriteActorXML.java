@@ -1,6 +1,7 @@
 package GenXML;
 
 
+import Main.FileBrowser;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,7 +24,7 @@ import org.w3c.dom.Element;
  *
  * @author FilmKhonDee
  */
-public class WriteXML {
+public class WriteActorXML {
     DocumentBuilderFactory docFactory;
     DocumentBuilder docBuilder;
     Document doc;
@@ -37,27 +38,26 @@ public class WriteXML {
     String fileName;
     
     //add element
-    Element company,fnameElement,lanameElement,salaryElement;
+    Element actor,idElement,titleElement,descriptElement,sterioElement;
     Attr attr;
     
     //variable of use
-    String id,fname,lname,salary;
+    String id,title,descrip,sterio;
     
-    public WriteXML(String id,String fname,String lname,String salary){
+    public WriteActorXML(String id,String title,String descrip,String sterio){
         this.id = id;
-        this.fname = fname;
-        this.lname = lname;
-        this.salary = salary;
+        this.title = title;
+        this.descrip = descrip;
+        this.sterio = sterio;
         
         getDocFactory();
         getDocBuilder();
         getDoc();
         getRootElement();
-        getCompany();
-        getAttr();
-        getFnameElement();
-        getLanameElement();
-        getSalaryElement();
+        getIdElement();
+        getTitleElement();
+        getDescriptElement();
+        getSterioElement();
         getTransformerFactory();
         getTransformer();
         getSource();
@@ -84,43 +84,37 @@ public class WriteXML {
     }
 
     public Element getRootElement() {
-        rootElement = doc.createElement("company");
+        rootElement = doc.createElement("actor");
         doc.appendChild(rootElement);
         return rootElement;
     }
 
-    public Element getCompany() {
-        company = doc.createElement("staff");
-        rootElement.appendChild(company);
-        return company;
+    public Element getIdElement() {
+        idElement = doc.createElement("Id");
+        idElement.appendChild(doc.createTextNode(id));
+        rootElement.appendChild(idElement);
+        return idElement;
     }
 
-    public Attr getAttr() {
-        attr = doc.createAttribute("id");
-        attr.setValue(id);
-        company.setAttributeNode(attr);
-        return attr;
+    public Element getTitleElement() {
+        titleElement = doc.createElement("title");
+        titleElement.appendChild(doc.createTextNode(title));
+        rootElement.appendChild(titleElement);
+        return titleElement;
     }
 
-    public Element getFnameElement() {
-        fnameElement = doc.createElement("firstname");
-        fnameElement.appendChild(doc.createTextNode(fname));
-        company.appendChild(fnameElement);
-        return fnameElement;
+    public Element getDescriptElement() {
+        descriptElement = doc.createElement("description");
+        descriptElement.appendChild(doc.createTextNode(descrip));
+        rootElement.appendChild(descriptElement);
+        return descriptElement;
     }
 
-    public Element getLanameElement() {
-        lanameElement = doc.createElement("lastname");
-        lanameElement.appendChild(doc.createTextNode(lname));
-        company.appendChild(lanameElement);
-        return lanameElement;
-    }
-
-    public Element getSalaryElement() {
-        salaryElement = doc.createElement("salary");
-        salaryElement.appendChild(doc.createTextNode(salary));
-        company.appendChild(salaryElement);
-        return salaryElement;
+    public Element getSterioElement() {
+        sterioElement = doc.createElement("stereotype");
+        sterioElement.appendChild(doc.createTextNode(sterio));
+        rootElement.appendChild(sterioElement);
+        return sterioElement;
     }
     
     public TransformerFactory getTransformerFactory() {
@@ -146,8 +140,9 @@ public class WriteXML {
     }
 
     public StreamResult getResult() {
+        FileBrowser file = new FileBrowser();
         try {
-            result = new StreamResult(new File("D:\\"+id+".xml"));
+            result = new StreamResult(new File("D:\\Doc\\ProjectName\\Actor\\"+id+".xml"));
             //result = new StreamResult(System.out);
             transformer.transform(source, result);
             System.out.println("Save file");
@@ -156,31 +151,24 @@ public class WriteXML {
         }
         return result;
     }
-    
+
     public String getId() {
-        Attr attr = doc.createAttribute("id");
-        attr.setValue(id);
-        company.setAttributeNode(attr);
         return id;
     }
 
-    public String getFname() {
-        return fname;
+    public String getTitle() {
+        return title;
     }
 
-    public String getLname() {
-        return lname;
+    public String getDescrip() {
+        return descrip;
     }
 
-    public String getSalary() {
-        return salary;
+    public String getSterio() {
+        return sterio;
     }
     
     public static void main(String[] arg){
-        WriteXML xml = new WriteXML("1","film","khondee","20000");
-        xml.getId();
-        xml.getFname();
-        xml.getLname();
-        xml.getSalary();
+        WriteActorXML xml = new WriteActorXML("1","film","khondee","20000");
     }
 }

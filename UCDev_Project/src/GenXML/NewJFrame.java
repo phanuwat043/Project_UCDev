@@ -1,8 +1,8 @@
 package GenXML;
 
 
-import GenXML.WriteXML;
-import GenXML.ReadXML;
+//import GenXML.WriteXML;
+//import GenXML.ReadXML;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -58,7 +58,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Salary");
 
-        ReadXML xml = new ReadXML("id","firstname","lastname","salary","D:\\1.xml");
+        /*ReadXML xml = new ReadXML("id","firstname","lastname","salary","D:\\1.xml");
         Vector item = new Vector();
         for (int temp = 0; temp < xml.nList.getLength(); temp++) {
             xml.nNode = xml.nList.item(temp);
@@ -70,7 +70,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 DefaultComboBoxModel model = new DefaultComboBoxModel(item);
                 itemBox = new javax.swing.JComboBox<>(model);
             }
-        }
+        }*/
         itemBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 itemBoxMouseClicked(evt);
@@ -159,7 +159,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemBoxMouseClicked
 
     private void itemBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBoxActionPerformed
-        ReadXML xml = new ReadXML("id","firstname","lastname","salary","D:\\1.xml");
+        /*ReadXML xml = new ReadXML("id","firstname","lastname","salary","D:\\1.xml");
         String id,fname,lname,salary;
         for (int temp = 0; temp < xml.nList.getLength(); temp++) {
             xml.nNode = xml.nList.item(temp);
@@ -175,12 +175,12 @@ public class NewJFrame extends javax.swing.JFrame {
                 lnametxt.setText(lname);
                 salarytxt.setText(salary);
             }
-        }
+        }*/
     }//GEN-LAST:event_itemBoxActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        WriteXML x = new WriteXML(itemBox.getSelectedItem().toString(),fnametxt.getText(),lnametxt.getText(),salarytxt.getText());
-        System.out.println(itemBox.getSelectedItem().toString());
+        /*WriteXML x = new WriteXML(itemBox.getSelectedItem().toString(),fnametxt.getText(),lnametxt.getText(),salarytxt.getText());
+        System.out.println(itemBox.getSelectedItem().toString());*/
     }//GEN-LAST:event_addBtnActionPerformed
 
     /**

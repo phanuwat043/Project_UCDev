@@ -90,9 +90,9 @@ public class actorForm extends JFrame{
         eventBtn();
     }
     
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         new actorForm();
-    }
+    }*/
     
     public void eventBtn(){
         btnSave.addActionListener(new ActionListener() {

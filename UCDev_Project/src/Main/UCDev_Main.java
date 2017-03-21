@@ -328,8 +328,7 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         
         saveActorBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                WriteActorXML xmlActor = new WriteActorXML(actorIDtxt.getText()
-                        ,actorNametxt.getText(),actorDestxt.getText(),typeCombo.getSelectedItem().toString());
+                
             }
         });
     }

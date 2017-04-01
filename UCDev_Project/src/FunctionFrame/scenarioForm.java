@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 //export UsecaseXML gennerate
 import GenXML.*;
+import javax.swing.JOptionPane;
 
 public class scenarioForm extends JFrame {
 
@@ -177,6 +178,8 @@ public class scenarioForm extends JFrame {
                            ,txtPrimaryActor.getText(),priorityCombo.getSelectedItem().toString()
                            ,complexCombo.getSelectedItem().toString(),txtGoal.getText()
                            ,txtPre.getText(),txtPost.getText(),"","","");
+                JOptionPane.showMessageDialog(null,"SAVE!!!");
+                 setVisible(false);
             }
 
         });

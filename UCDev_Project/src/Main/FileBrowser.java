@@ -63,6 +63,7 @@ public class FileBrowser extends JInternalFrame {
         });
         getContentPane().add(tree);
         setVisible(true);
+        tree.repaint();
     }
 
     public class CreateChildNodes implements Runnable {
@@ -227,7 +228,7 @@ public class FileBrowser extends JInternalFrame {
             model.removeNodeFromParent(node);
         }
     }
-
+    
     public String getFile() {
         return file;
     }

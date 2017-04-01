@@ -53,6 +53,9 @@ import GenXML.*;
 import genHTML.GenActor;
 import genHTML.GenUseCase;
 import java.awt.event.MouseListener;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import javafx.scene.shape.Ellipse;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -60,29 +63,26 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 //import net.sourceforge.xuse.Xuse;
 
-public class UCDev_Main extends JFrame implements MouseMotionListener {
+public class UCDev_Main extends JFrame {
 
     //Xuse x = new Xuse();
     ActorXMLfile acXml = new ActorXMLfile();
+    
     FileBrowser fileForm = new FileBrowser();
     
-    DragDrop d;
-    //DrawOval o = new DrawOval(50, 50);
-    Graphics g;
-    Graphics2D g2d;
     private String[] sType = {"Person", "System"};
 
     public UCDev_Main() {
         initUI();
-        setSize(1050, 700);
+        //setSize(1050, 700);
         //this.d = new DragDrop(20,20,d.getGraphics());
-        jpanel2.addMouseMotionListener(this);
+        
     }
 
     private void initUI(){
         setTitle("UCDev version 1.0");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
         
         //Menubar
@@ -131,6 +131,7 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         //event JMenuitem
         create.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                FileBrowser file = new FileBrowser(); 
                 String s = (String) JOptionPane.showInputDialog(
                         null,
                         "UCDev PROJECT:\n"
@@ -172,6 +173,9 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
 
         });
 
+        //Scrollpane
+        scrollpane = new JScrollPane();
+        
         //panel
         jpanel1 = new JPanel();
         jpanel2 = new JPanel();
@@ -181,7 +185,7 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         
         //set background color panel 
         //jpanel1.setBackground(Color.CYAN);
-        //jpanel2.setBackground(Color.white);
+        jpanel2.setBackground(Color.white);
         //jpanel3.setBackground(Color.CYAN);
      
         //set layout of jpanel3
@@ -193,8 +197,8 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         JToolBar toolBar = new JToolBar("My Toolbar", JToolBar.HORIZONTAL);
         
          
-        jpanel2.add(toolBar);
-        getContentPane().add(toolBar, BorderLayout.WEST);
+        add(toolBar);
+        getContentPane().add(toolBar, BorderLayout.NORTH);
        
         // button system
 	systemBtn = new JButton(new ImageIcon("image/Object.gif"));
@@ -225,14 +229,10 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         toolBar.add(associationBtn);
        
 
-        jpanel2.add(toolBar);//add toolbar to jpanel1
-
-        //Scrollpane
-        scrollpane = new JScrollPane();
-        scrollpane.add(jpanel2);
+        jpanel2.add(scrollpane);
         getContentPane().add(scrollpane, BorderLayout.CENTER);
         
-        
+        //scrollpane.add(toolBar);//add toolbar to jpanel1
          
      
 
@@ -243,12 +243,12 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
         splitPane1.setLeftComponent(jpanel1); // Left
         splitPane1.setRightComponent(jpanel2); // Right
 
-        splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+        /*splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         splitPane2.setBounds(70, 70, 70, 70);
         splitPane2.setDividerLocation(700);
         splitPane2.setTopComponent(jpanel2);//top
         splitPane2.setBottomComponent(jpanel3);//bottom
-        splitPane1.add(splitPane2);
+        splitPane1.add(splitPane2);*/
         getContentPane().add(splitPane1);
         
        
@@ -367,20 +367,20 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
     public void EventBtn() {
         systemBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //new dataDictForm();
-                //add(jpanel2,d.getGraphics());
+                
             }
         });
 
-        actorBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new actorForm();
+        actorBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
             }
         });
-
+        
         usecaseBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new scenarioForm();
+                
             }
         });
 
@@ -401,16 +401,47 @@ public class UCDev_Main extends JFrame implements MouseMotionListener {
     private JButton saveActorBtn;//actor && usecase
     private ImageIcon system;//image icon
 
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        /*d.x = e.getX();
-        d.y = e.getY();
-        scrollpane.revalidate();
-        jpanel2.repaint();*/
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
+    
+    class Actor extends JPanel{
+        private BufferedImage bi;
+        int x, y;
+        String current, filePath;
         
+        public Actor(){
+            addMouseMotionListener(new MouseMotionHandler());
+            
+            Image image = getToolkit().getImage("image\\Actor.gif");
+            MediaTracker mt = new MediaTracker(this);
+            mt.addImage(image, 1);
+                    
+            if (image.getWidth(this) == -1) {
+                System.out.println("no jpg file");
+                //System.exit(0);
+            }
+            
+            bi = new BufferedImage(image.getWidth(this), image.getHeight(this),
+                    BufferedImage.TYPE_INT_ARGB);
+            Graphics2D big = bi.createGraphics();
+            big.drawImage(image, 0, 0, this);
+        }
+        
+        public Dimension getPreferredSize() {
+            return new Dimension(250, 200);
+        }
+        
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2D = (Graphics2D) g;
+            g2D.drawImage(bi, x, y, this);
+        }
+        
+        class MouseMotionHandler extends MouseMotionAdapter {
+
+            public void mouseDragged(MouseEvent e) {
+                x = e.getX();
+                y = e.getY();
+                repaint();
+            }
+        }
     }
 }

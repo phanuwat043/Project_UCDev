@@ -5,10 +5,13 @@
  */
 package FunctionFrame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,10 +23,10 @@ import javax.swing.table.DefaultTableModel;
  * @author NUT
  */
 public class altForm extends JFrame{
-    
-    private String[] step = {"Step1","Step2","Step3"};
-    private String[][] data = {{"1","1","1"},{"2","2","2"},{"3","3","3"}};
-    private String[] header = {"StepID","Description","Ref.Step"};
+    private String[][] data = new String[20][2];
+    int i=0,stepID=1;
+    String id,id2;
+    private String[] header = {"StepID","Description"};
     
     public altForm(){
          initUI();
@@ -44,58 +47,86 @@ public class altForm extends JFrame{
         //label
         label1 = new JLabel("StepID");
         label2 = new JLabel("Description");
-        label3 = new JLabel("Ref.Step ID");
         
          //textField
         txtStepID = new JTextField();
         txtDes = new JTextField();
-        
-        //ComboBox
-        stepCombo = new JComboBox(step);
-        
-        //set bounds of combobox
-        stepCombo.setBounds(150,140,100,20);
-        
-        //set default value of index
-        stepCombo.setSelectedIndex(0);
-        
-        
-        
+   
         //Button
+        addBtn = new JButton("Add to list");
         saveBtn = new JButton("Save");
         
          //set bounds of btn
-        saveBtn.setBounds(280,140,90,20);
+        addBtn.setBounds(320,100,90,20);
+        saveBtn.setBounds(200,260,90,20);
         
         //setBounds of label
         label1.setBounds(20,60,90,20);
         label2.setBounds(20,100,120,20);
-        label3.setBounds(20,140,120,20);
         
          //set Bounds of textField
         txtStepID.setBounds(150,60,100,20);
         txtDes.setBounds(150,100,150,20);
+        txtStepID.setEditable(false);
         
         //add btn to panel
         panel1.add(saveBtn);
+        panel1.add(addBtn);
         
         //add label to panel
         panel1.add(label1);
         panel1.add(label2);
-        panel1.add(label3);
         
-        //add combo box
-        panel1.add(stepCombo);
         
         //add textField to panel
         panel1.add(txtStepID);
         panel1.add(txtDes);
+        //setValue
+        txtStepID.setText(String.valueOf(stepID));
         
-        //create table
-        JTable table = new JTable(data,header);
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(36, 180, 407, 79);
-        panel1.add(scrollPane);
+        
+       
+        addBtn.addActionListener(new ActionListener() {
+   
+            
+            public void actionPerformed(ActionEvent e) {
+                 //a = txtStepID.getText().toString();
+                 //b = txtDes.getText().toString();
+                 
+                 id = String.valueOf(stepID);
+                 data[i][0] = txtStepID.getText().toString();
+                 data[i][1] = txtDes.getText().toString();
+                 
+                 
+                 System.out.println("A: "+data[i][0]+" and  B: "+data[i][1]);
+                 
+                 
+                 
+                 table = new JTable(data,header);
+                 JScrollPane scrollPane = new JScrollPane(table);
+                 scrollPane.setBounds(36, 150, 407, 79);
+                 panel1.add(scrollPane);
+                 i = i+1;
+                stepID = stepID+1;
+                 
+                id2 = String.valueOf(stepID);
+                System.out.println(id2);
+                txtStepID.setText(id2);
+                txtDes.setText("");
+                
+            }
+        });
+        
+        saveBtn.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                 for(int j=0;j<i;j++){
+                    System.out.println("Flow event:"+j+" "+data[j][0]+"   Flow event:"+j+" "+data[j][1]);
+                 }
+                JOptionPane.showMessageDialog(null,"SAVE!!!");
+                 setVisible(false);
+            }
+        });
         
         getContentPane().add(panel1);
        
@@ -112,8 +143,8 @@ public class altForm extends JFrame{
     private JPanel panel1;
     private JLabel label1,label2,label3;
     private JTextField txtStepID,txtDes;
-    private JButton saveBtn;
-    private JTable inputTable;
+    private JButton saveBtn,addBtn;
+    private JTable inputTable,table;
     private JComboBox stepCombo;
     private JScrollPane scrollpane1;
     private DefaultTableModel model;
